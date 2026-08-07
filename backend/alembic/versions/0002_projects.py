@@ -1,17 +1,10 @@
-"""Create projects table
 
-Revision ID: 0002_projects
-Revises: 0001_auth_tables
-Create Date: 2026-08-07
-
-"""
 
 from collections.abc import Sequence
 
 import sqlalchemy as sa
 from alembic import op
 
-# revision identifiers, used by Alembic.
 revision: str = "0002_projects"
 down_revision: str | None = "0001_auth_tables"
 branch_labels: str | Sequence[str] | None = None
