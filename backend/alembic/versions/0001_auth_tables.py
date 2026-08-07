@@ -1,17 +1,11 @@
-"""Create auth tables (users, auth_sessions, password_reset_tokens)
 
-Revision ID: 0001_auth_tables
-Revises:
-Create Date: 2026-08-07
-
-"""
 
 from collections.abc import Sequence
 
 import sqlalchemy as sa
 from alembic import op
 
-# revision identifiers, used by Alembic.
+
 revision: str = "0001_auth_tables"
 down_revision: str | None = None
 branch_labels: str | Sequence[str] | None = None
