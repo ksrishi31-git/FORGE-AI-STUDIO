@@ -27,52 +27,52 @@ design documents in `docs/`.
 ## Quickstart
 
 ```bash
-# 1. Install backend (virtualenv) and frontend dependencies
+ 1. Install backend (virtualenv) and frontend dependencies
 npm run setup
 
-# 2. Start everything (Postgres + Redis via Docker, API, web)
+ 2. Start everything (Postgres + Redis via Docker, API, web)
 npm run dev
 
-# API docs: http://localhost:8000/api/v1/docs
-# Web:      http://localhost:3000
+ API docs: http://localhost:8000/api/v1/docs
+ Web:      http://localhost:3000
 ```
 
 ### Individual services
 
 ```bash
-npm run dev:api    # backend only (uvicorn --reload on :8000)
-npm run dev:web    # frontend only (next dev on :3000)
+npm run dev:api     backend only (uvicorn --reload on :8000)
+npm run dev:web     frontend only (next dev on :3000)
 docker compose -f docker/docker-compose.yml up -d postgres redis
 ```
 
 ### Health check
 
 ```bash
-npm run health          # curl /api/v1/health
-# -> {"status":"healthy","service":"ForgeAI Studio","version":"1.0.0"}
+npm run health           curl /api/v1/health
+-> {"status":"healthy","service":"ForgeAI Studio","version":"1.0.0"}
 ```
 
 ### Validation
 
 ```bash
-npm run test            # backend pytest + ruff, frontend eslint + typecheck
-npm run format          # frontend prettier
+npm run test             backend pytest + ruff, frontend eslint + typecheck
+npm run format           frontend prettier
 ```
 
 ## Repository structure
 
 ```
 forgeai-studio/
-├── frontend/            # Next.js 15 application (app router, components,
-│                        #   features, hooks, lib, providers, services,
-│                        #   styles, types, public)
-├── backend/             # FastAPI service (app: api, core, config, database,
-│                        #   models, schemas, services, agents, memory, tools;
-│                        #   alembic/, tests/)
-├── docker/              # Dockerfiles, compose topology, env template
-├── scripts/             # setup / dev / test / health helpers
-├── docs/                # finalized design documents index
-└── package.json         # monorepo orchestration
+├── frontend/             Next.js 15 application (app router, components,
+│                           features, hooks, lib, providers, services,
+│                           styles, types, public)
+├── backend/              FastAPI service (app: api, core, config, database,
+│                           models, schemas, services, agents, memory, tools;
+│                           alembic/, tests/)
+├── docker/               Dockerfiles, compose topology, env template
+├── scripts/              setup / dev / test / health helpers
+├── docs/                 finalized design documents index
+└── package.json          monorepo orchestration
 ```
 
 ## Configuration
