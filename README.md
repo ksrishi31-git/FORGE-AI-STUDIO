@@ -40,23 +40,24 @@ npm run dev
 ### Individual services
 
 ```bash
-npm run dev:api     backend only (uvicorn --reload on :8000)
-npm run dev:web     frontend only (next dev on :3000)
+npm run dev:api    - backend only (uvicorn --reload on :8000)
+npm run dev:web    - frontend only (next dev on :3000)
 docker compose -f docker/docker-compose.yml up -d postgres redis
 ```
 
 ### Health check
 
 ```bash
-npm run health           curl /api/v1/health
--> {"status":"healthy","service":"ForgeAI Studio","version":"1.0.0"}
+npm run health
+#->   curl /api/v1/health
+#-> {"status":"healthy","service":"ForgeAI Studio","version":"1.0.0"}
 ```
 
 ### Validation
 
 ```bash
-npm run test             backend pytest + ruff, frontend eslint + typecheck
-npm run format           frontend prettier
+npm run test            - backend pytest + ruff, frontend eslint + typecheck
+npm run format          - frontend prettier
 ```
 
 ## Repository structure
