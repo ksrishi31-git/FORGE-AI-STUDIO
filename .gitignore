@@ -1,0 +1,54 @@
+# ---- Environment ----
+.env
+.env.local
+.env.*.local
+!.env.example
+!.env.sample
+
+# ---- Node / Frontend ----
+node_modules/
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# ---- Python / Backend ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+*.log
+
+# ---- Docker ----
+docker/volumes/
+
+# ---- Vector data ----
+chroma-data/
+
+# ---- Editors / OS ----
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# ---- Tooling ----
+coverage.xml
+junit.xml
+
+# ---- Local databases ----
+
+*.db
+*.sqlite
+*.sqlite3

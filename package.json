@@ -1,0 +1,22 @@
+{
+  "name": "forgeai-studio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ForgeAI Studio — autonomous multi-agent software engineering platform (monorepo orchestration)",
+  "scripts": {
+    "setup": "bash scripts/setup.sh",
+    "dev": "bash scripts/dev.sh",
+    "dev:web": "bash scripts/dev-web.sh",
+    "dev:api": "bash scripts/dev-api.sh",
+    "build:web": "npm run build --prefix frontend",
+    "lint": "npm run lint --prefix frontend",
+    "typecheck": "npm run typecheck --prefix frontend",
+    "format": "npm run format --prefix frontend",
+    "test": "bash scripts/test.sh",
+    "health": "bash scripts/healthcheck.sh"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  }
+}

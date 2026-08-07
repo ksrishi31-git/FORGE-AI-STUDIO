@@ -1,0 +1,74 @@
+# ForgeAI Studio — local development stack (DAD §2)
+# Copy docker/.env.example to docker/.env before `docker compose up`.
+name: forgeai-studio
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-forgeai}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-forgeai}
+      POSTGRES_DB: ${POSTGRES_DB:-forgeai}
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-forgeai} -d ${POSTGRES_DB:-forgeai}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - forgeai_internal
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks:
+      - forgeai_internal
+
+  api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.api
+    environment:
+      APP_ENV: development
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-forgeai}:${POSTGRES_PASSWORD:-forgeai}@postgres:5432/${POSTGRES_DB:-forgeai}
+      REDIS_URL: redis://redis:6379/0
+      CORS_ORIGINS: '["http://localhost:3000"]'
+      LOG_LEVEL: INFO
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - forgeai_internal
+
+  web:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.web
+    environment:
+      # Empty => same-origin /api proxied to the API service via Next rewrites.
+      NEXT_PUBLIC_API_URL: ""
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    networks:
+      - forgeai_internal
+
+volumes:
+  pg_data:
+  redis_data:
+
+networks:
+  forgeai_internal:
