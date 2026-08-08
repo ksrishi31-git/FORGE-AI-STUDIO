@@ -376,6 +376,6 @@ Dhanvanth
 Rishi Karthick
 Thomas Edwin
 Anbu Selvan
-College
 
+College
 Dr. Mahalingam College of Engineering and Technology
